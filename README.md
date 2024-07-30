@@ -8,15 +8,16 @@ enhancing the user experience and the visual appeal of the website.
 
 
 Key Features
-Image Navigation:
-- Buttons for navigating forward and backward through the images.
+cards Navigation:
+- Buttons for navigating forward and backward through the cards.
+- Buttons for pagination to go into a specific page
+- scroll using mouse or touch
 
 Responsive Design:
 - Adaptability to different screen sizes (desktop, tablet, mobile).
-- Support for images of various sizes and proportions.
 
 Transitions and Animations:
-- Smooth transition effects between images.
+- Smooth transition effects between cards.
 - Customizable transition animations.
 
 
