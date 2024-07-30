@@ -1,20 +1,33 @@
-# carousel-vue
+# carousel
 
-Prerequisites:
-Ensure you have Node.js and npm installed.
-Familiarity with Vue.js and TypeScript.
+This template should help get you started developing with Vue 3 in Vite.
 
-----------------------
+## Recommended IDE Setup
 
-Installation Steps
-- Create a Vue.js Project: Use Vue CLI to create a new project. Make sure to select TypeScript during setup.
-- Navigate to the Project Directory: Enter the directory of your newly created project.
-- Install Dependencies: Install necessary dependencies, such as Vue Router, if not already included.
-- Create the Carousel Component: Create a new file Carousel.vue in the src/components directory and add the component code.
-- Create the Button Component: Create a Btn.vue file in the src/components directory and add the button component code.
-- Import and Use the Component: Import and use the carousel component in your main application file (e.g., App.vue), setting up the cards and handling slide events.
-- Run the Project: Use npm run dev to start the development server and view the carousel in action in your browser.
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
----------------------
+## Type Support for `.vue` Imports in TS
 
-This guide helps you set up and install everything needed to run the image carousel component in Vue.js using HTML, CSS, Vue Components, TypeScript, and JavaScript.
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+
+## Customize configuration
+
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+## Project Setup
+
+```sh
+npm install
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+### Type-Check, Compile and Minify for Production
+
+```sh
+npm run build
+```
