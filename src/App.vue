@@ -57,13 +57,12 @@ const nextSlide = () => {
   console.log("button-right click")
 }
 
+
 </script> 
 
 
-<!-- questa é una prova di commit -->
-<!-- questa é una prova di commit -->
-<template>
 
+<template>
   <Carousel @prev-slide="prevSlide" @next-slide="nextSlide" :cards></Carousel>
 
 </template>

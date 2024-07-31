@@ -11,7 +11,8 @@ Key Features
 cards Navigation:
 - Buttons for navigating forward and backward through the cards.
 - Buttons for pagination to go into a specific page
-- scroll using mouse or touch
+- scroll with mouse or touch, using mouse and touch event
+- loop function that can be disabled using :loop="false" in the "carousel" component on the app.vue page
 
 Responsive Design:
 - Adaptability to different screen sizes (desktop, tablet, mobile).
