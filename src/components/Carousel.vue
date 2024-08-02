@@ -9,6 +9,7 @@ const props = withDefaults(defineProps<{
         content?: string
     }[];
     loop?: boolean
+
 }>(), { loop: false });
 
 const emit = defineEmits(['prev-slide', 'next-slide'])
@@ -141,6 +142,7 @@ const endDrag = () => {
 const styleTransition = computed(() => ({ transform: `translate(${deltaX.value}px)` }))
 
 
+
 </script>
 
 <template>
@@ -208,7 +210,7 @@ const styleTransition = computed(() => ({ transform: `translate(${deltaX.value}p
     min-height: 300px;
     border-radius: 10px;
     cursor: pointer;
-    position: relative;
+    position: sticky;
     background: white;
 
     &__box {
