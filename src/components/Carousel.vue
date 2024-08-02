@@ -8,7 +8,9 @@ const props = withDefaults(defineProps<{
         title?: string
         content?: string
     }[];
-}>(), {});
+    loop?: boolean
+
+}>(), { loop: false });
 
 const emit = defineEmits(['prev-slide', 'next-slide'])
 const cardsForPage = ref(1)
@@ -22,8 +24,9 @@ const isDragging = ref(false)
 const dragLimit = 50
 const hasExceededDragLimit = ref(false)
 const totalDots = computed(() => Math.ceil(props.cards.length / cardsForPage.value))
-const isPrevDisabled = computed(() => currentPage.value === 0)
-const isNextDisabled = computed(() => currentPage.value >= totalDots.value * cardsForPage.value - cardsForPage.value)
+
+const isPrevDisabled = computed(() => !props.loop && currentPage.value === 0)
+const isNextDisabled = computed(() => !props.loop && currentPage.value >= totalDots.value * cardsForPage.value - cardsForPage.value)
 
 // functioni carosello navigation 
 const prevPage = () => {
@@ -31,8 +34,14 @@ const prevPage = () => {
         slideRight.value = false
         slideLeft.value = true
         currentPage.value -= cardsForPage.value
-        emit('prev-slide')
+
     }
+
+    if (props.loop && currentPage.value < 0) {
+        currentPage.value = props.cards.length - cardsForPage.value;
+    }
+
+    emit('prev-slide')
 }
 
 const nextPage = () => {
@@ -40,8 +49,12 @@ const nextPage = () => {
         slideLeft.value = false
         slideRight.value = true
         currentPage.value += cardsForPage.value
-        emit('next-slide')
     }
+
+    if (props.loop && currentPage.value >= props.cards.length) {
+        currentPage.value = 0;
+    }
+    emit('next-slide')
 }
 
 //se clicco i dots mi manda alla pagina
@@ -93,14 +106,16 @@ const onDrag = (e: MouseEvent | TouchEvent) => {
     const currentDeltaX = ('touches' in e ? e.touches[0].clientX : e.clientX) - startX.value
 
     // No effetto translate nella prima slide e ultima pagina
-    if (currentPage.value === 0 && currentDeltaX > 0 || currentPage.value >= props.cards.length - cardsForPage.value && currentDeltaX < 0) {
+    if (!props.loop && (currentPage.value === 0 && currentDeltaX > 0 || currentPage.value >= props.cards.length - cardsForPage.value && currentDeltaX < 0)) {
         return
     }
     deltaX.value = currentDeltaX
 
     if (Math.abs(deltaX.value) >= dragLimit && !hasExceededDragLimit.value) {
         const direction = deltaX.value > 0 ? -cardsForPage.value : cardsForPage.value
-        const newSlideIndex = Math.min(Math.max(currentPage.value + direction, 0), props.cards.length - 1)// prima non andava perché al posto dell'uno c'era :cardsForPage.value
+        const newSlideIndex = (props.loop) // se loop = true allora esegue la prima parte, se é false esegue l'altra parte
+            ? (currentPage.value + direction + props.cards.length) % props.cards.length
+            : Math.min(Math.max(currentPage.value + direction, 0), props.cards.length - 1); //
         if (newSlideIndex !== currentPage.value) {
             currentPage.value = newSlideIndex
             if (direction > 0) {
@@ -127,14 +142,16 @@ const endDrag = () => {
 const styleTransition = computed(() => ({ transform: `translate(${deltaX.value}px)` }))
 
 
+
 </script>
 
 <template>
     <section class="carousel-wrapper">
-        <btn @click="prevPage" class="carousel-wrapper__btn--left" :disabled="isPrevDisabled"
-            :class="{ 'disabled': isPrevDisabled }" icon="fa-solid fa-chevron-left">
-        </btn>
-
+        <div class="carousel-wrapper__buttons">
+            <btn v-if="props.loop || currentPage > 0" @click="prevPage" class="carousel-wrapper__btn--left"
+                :disabled="isPrevDisabled" :class="{ 'disabled': isPrevDisabled }" icon="fa-solid fa-chevron-left">
+            </btn>
+        </div>
         <transition-group :name="slideLeft ? 'transition-left' : 'transition-right'" tag="div" class="carousel"
             ref="carousEl" @mousedown="startDrag" @mousemove="onDrag" @mouseup="endDrag" :style="styleTransition"
             @touchstart.passive="startDrag" @touchmove.passive="onDrag" @touchend="endDrag" appear>
@@ -149,11 +166,12 @@ const styleTransition = computed(() => ({ transform: `translate(${deltaX.value}p
                 </div>
             </template>
         </transition-group>
-
-        <btn @click="nextPage" class="carousel-wrapper__btn--right" :disabled="isNextDisabled"
-            :class="{ 'disabled': isNextDisabled }" icon="fa-solid fa-chevron-right">
-        </btn>
-
+        <div class="carousel-wrapper__buttons">
+            <btn v-if="props.loop || currentPage < props.cards.length - cardsForPage" @click="nextPage"
+                class="carousel-wrapper__btn--right" :disabled="isNextDisabled" :class="{ 'disabled': isNextDisabled }"
+                icon="fa-solid fa-chevron-right">
+            </btn>
+        </div>
         <div class="dots">
             <btn modifiers="dot" v-for="index in totalDots" :key="index" :class="{ active: isActiveDot(index) }"
                 @click="goToPage(index - 1)">
@@ -171,6 +189,10 @@ const styleTransition = computed(() => ({ transform: `translate(${deltaX.value}p
     gap: 20px;
     padding: 0 1rem;
     min-height: 450px;
+
+    &__buttons {
+        width: 50px;
+    }
 }
 
 .carousel {
@@ -188,7 +210,7 @@ const styleTransition = computed(() => ({ transform: `translate(${deltaX.value}p
     min-height: 300px;
     border-radius: 10px;
     cursor: pointer;
-    position: relative;
+    position: sticky;
     background: white;
 
     &__box {
