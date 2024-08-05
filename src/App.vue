@@ -63,7 +63,7 @@ const nextSlide = () => {
 
 
 <template>
-  <Carousel @prev-slide="prevSlide" @next-slide="nextSlide" :cards loop></Carousel>
+  <Carousel @prev-slide="prevSlide" @next-slide="nextSlide" :cards></Carousel>
 
 </template>
 
