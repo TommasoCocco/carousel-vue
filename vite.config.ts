@@ -9,6 +9,7 @@ export default defineConfig((config) => {
   return {
     base: config.mode === 'development' ? '/' : '/carousel-vue/',
     // publicDir:  '/carousel-vue/',
+    assetsDir: 'assets',
     plugins: [
       vue(),
       vueJsx(),
