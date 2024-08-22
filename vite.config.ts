@@ -8,8 +8,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 export default defineConfig((config) => {
   return {
     base: config.mode === 'development' ? '/' : '/carousel-vue/',
-    // publicDir:  '/carousel-vue/',
-    assetsDir: 'assets',
+    publicDir: '',
     plugins: [
       vue(),
       vueJsx(),
