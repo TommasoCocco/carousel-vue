@@ -3,47 +3,47 @@ import Carousel from './components/Carousel.vue';
 
 const cards = [
   {
-    img: "/images/Colorful.jpeg",
+    img: "/public/images/Colorful.jpeg",
     title: "Card 1",
     content: "Card content",
   },
   {
-    img: "/images/e89fc829-8542-4077-b990-7ae60a341608.jpeg",
+    img: "/public/images/e89fc829-8542-4077-b990-7ae60a341608.jpeg",
     title: "Card 2",
     content: "Card content",
   },
   {
-    img: "/images/foto-11.jpg",
+    img: "/public/images/foto-11.jpg",
     title: "Card 3",
     content: "Card content",
   },
   {
-    img: "/images/36dd9c91-4230-4731-a476-1605822ad829.jpeg",
+    img: "/public/images/36dd9c91-4230-4731-a476-1605822ad829.jpeg",
     title: "Card 4",
     content: "Card content",
   },
   {
-    img: "/images/38a95cfc-df90-44d5-978a-d9f6498d931f.jpeg",
+    img: "/public/images/38a95cfc-df90-44d5-978a-d9f6498d931f.jpeg",
     title: "Card 5",
     content: "Card content",
   },
   {
-    img: "/images/foto-1.jpg",
+    img: "/public/images/foto-1.jpg",
     title: "Card 6",
     content: "Card content",
   },
   {
-    img: "/images/foto-7.jpg",
+    img: "/public/images/foto-7.jpg",
     title: "Card 7",
     content: "Card content",
   },
   {
-    img: "/images/foto-10.jpg",
+    img: "/public/images/foto-10.jpg",
     title: "Card 8",
     content: "Card content",
   },
   {
-    img: "/images/8eb0bc14-e03c-407f-b199-0de77dfc4de2.jpeg",
+    img: "/public/images/8eb0bc14-e03c-407f-b199-0de77dfc4de2.jpeg",
     title: "Card 9",
     content: "Card content",
   }
